@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placeholder Image Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .placeholder {
+            display: inline-block;
+            margin: 10px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .hero-bg {
+            width: 1920px;
+            height: 1080px;
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #F5F0E6 100%);
+            position: relative;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        }
+        .profile-img {
+            width: 400px;
+            height: 600px;
+            background: linear-gradient(45deg, #F5F0E6 0%, #D2B48C 50%, #8B4513 100%);
+            position: relative;
+        }
+        .profile-img::before {
+            content: '👤';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 120px;
+            opacity: 0.3;
+        }
+        .portfolio-bg {
+            width: 1920px;
+            height: 600px;
+            background: linear-gradient(45deg, #3E2C23 0%, #5D4037 50%, #8D6E63 100%);
+            position: relative;
+        }
+        .portfolio-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(245,240,230,0.2) 0%, transparent 60%);
+        }
+        .thank-you-bg {
+            width: 1920px;
+            height: 600px;
+            background: linear-gradient(135deg, #F5F0E6 0%, #D2B48C 50%, #8B4513 100%);
+            position: relative;
+        }
+        .thank-you-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(62,44,35,0.1) 0%, transparent 70%);
+        }
+        .portfolio-item {
+            width: 600px;
+            height: 400px;
+            background: linear-gradient(45deg, #F5F0E6 0%, #D2B48C 100%);
+            position: relative;
+        }
+        .portfolio-item::before {
+            content: '📸';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            opacity: 0.4;
+        }
+        .portfolio-item:nth-child(2) {
+            background: linear-gradient(45deg, #8B4513 0%, #D2691E 100%);
+        }
+        .portfolio-item:nth-child(3) {
+            background: linear-gradient(45deg, #5D4037 0%, #8D6E63 100%);
+        }
+        .portfolio-item:nth-child(4) {
+            background: linear-gradient(45deg, #3E2C23 0%, #5D4037 100%);
+        }
+        .instructions {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .download-btn {
+            background: #3E2C23;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .download-btn:hover {
+            background: #5D4037;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h1>Portfolio Placeholder Images</h1>
+        <p>Right-click on each image below and "Save image as..." to download them as placeholder images for the portfolio website.</p>
+        <p><strong>Note:</strong> These are temporary placeholder images. Replace them with actual high-quality photos of Charul's work.</p>
+    </div>
+
+    <h2>Hero Background (Anime.jpg)</h2>
+    <div class="placeholder">
+        <div class="hero-bg"></div>
+    </div>
+    <button class="download-btn" onclick="downloadImage('hero-bg', 'Anime.jpg')">Download Hero Background</button>
+
+    <h2>Profile Photo (Cherry.jpg)</h2>
+    <div class="placeholder">
+        <div class="profile-img"></div>
+    </div>
+    <button class="download-btn" onclick="downloadImage('profile-img', 'Cherry.jpg')">Download Profile Photo</button>
+
+    <h2>Portfolio Quote Background (portfolio-bg.jpg)</h2>
+    <div class="placeholder">
+        <div class="portfolio-bg"></div>
+    </div>
+    <button class="download-btn" onclick="downloadImage('portfolio-bg', 'portfolio-bg.jpg')">Download Portfolio Background</button>
+
+    <h2>Thank You Background (thank-you-bg.jpg)</h2>
+    <div class="placeholder">
+        <div class="thank-you-bg"></div>
+    </div>
+    <button class="download-btn" onclick="downloadImage('thank-you-bg', 'thank-you-bg.jpg')">Download Thank You Background</button>
+
+    <h2>Portfolio Items</h2>
+    <div class="placeholder">
+        <div class="portfolio-item"></div>
+    </div>
+    <button class="download-btn" onclick="downloadImage('portfolio-item', 'portfolio-1.jpg')">Download Portfolio 1</button>
+
+    <div class="placeholder">
+        <div class="portfolio-item"></div>
+    </div>
+    <button class="download-btn" onclick="downloadImage('portfolio-item', 'portfolio-2.jpg')">Download Portfolio 2</button>
+
+    <div class="placeholder">
+        <div class="portfolio-item"></div>
+    </div>
+    <button class="download-btn" onclick="downloadImage('portfolio-item', 'portfolio-3.jpg')">Download Portfolio 3</button>
+
+    <div class="placeholder">
+        <div class="portfolio-item"></div>
+    </div>
+    <button class="download-btn" onclick="downloadImage('portfolio-item', 'portfolio-4.jpg')">Download Portfolio 4</button>
+
+    <script>
+        function downloadImage(elementClass, filename) {
+            const element = document.querySelector('.' + elementClass);
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            canvas.width = element.offsetWidth;
+            canvas.height = element.offsetHeight;
+            
+            // Get computed styles
+            const styles = window.getComputedStyle(element);
+            const background = styles.background;
+            
+            // Create gradient based on background
+            if (background.includes('linear-gradient')) {
+                // This is a simplified approach - in a real implementation,
+                // you'd parse the CSS gradient and recreate it on canvas
+                ctx.fillStyle = '#F5F0E6';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            
+            // Convert to image and download
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/jpeg', 0.8);
+            link.click();
+        }
+    </script>
+</body>
+</html>
