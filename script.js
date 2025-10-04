@@ -63,7 +63,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe elements for animation
-const animateElements = document.querySelectorAll('.service-card, .portfolio-item, .testimonial-card, .stat');
+const animateElements = document.querySelectorAll('.service-card, .portfolio-item, .testimonial-card, .stat, .collaboration-item');
 animateElements.forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
@@ -127,6 +127,84 @@ const testimonialsSwiper = new Swiper('.testimonials-swiper', {
     }
 });
 
+// Instagram Thumbnail Loader
+async function loadInstagramThumbnails() {
+    const thumbnails = document.querySelectorAll('.instagram-thumbnail');
+    
+    thumbnails.forEach(async (thumbnail) => {
+        const url = thumbnail.getAttribute('data-url');
+        if (!url) return;
+        
+        try {
+            // Extract reel ID from URL
+            const reelId = url.match(/\/reel\/([^\/\?]+)/)?.[1];
+            if (!reelId) return;
+            
+            // Create Instagram embed URL
+            const embedUrl = `https://www.instagram.com/p/${reelId}/embed/`;
+            
+            // Create iframe to get thumbnail
+            const iframe = document.createElement('iframe');
+            iframe.src = embedUrl;
+            iframe.style.width = '100%';
+            iframe.style.height = '400px';
+            iframe.style.border = 'none';
+            iframe.style.borderRadius = '20px';
+            iframe.style.overflow = 'hidden';
+            
+            // Replace loading placeholder with iframe
+            const loadingPlaceholder = thumbnail.querySelector('.loading-placeholder');
+            if (loadingPlaceholder) {
+                loadingPlaceholder.remove();
+            }
+            thumbnail.appendChild(iframe);
+            
+        } catch (error) {
+            console.log('Could not load Instagram thumbnail:', error);
+            // Fallback: show a generic Instagram-style placeholder
+            const loadingPlaceholder = thumbnail.querySelector('.loading-placeholder');
+            if (loadingPlaceholder) {
+                loadingPlaceholder.innerHTML = `
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📱</div>
+                    <p>Instagram Reel</p>
+                `;
+            }
+        }
+    });
+}
+
+// Collaborations Swiper Initialization
+const collaborationsSwiper = new Swiper('.collaborations-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+        768: {
+            slidesPerView: 2,
+        },
+        1024: {
+            slidesPerView: 3,
+        }
+    }
+});
+
+// Load Instagram thumbnails when page loads
+window.addEventListener('load', () => {
+    setTimeout(loadInstagramThumbnails, 1000); // Delay to ensure page is fully loaded
+});
+
 // Hover effects for service cards
 const serviceCards = document.querySelectorAll('.service-card');
 serviceCards.forEach(card => {
@@ -151,6 +229,24 @@ portfolioItems.forEach(item => {
     
     item.addEventListener('mouseleave', () => {
         const overlay = item.querySelector('.portfolio-overlay');
+        if (overlay) {
+            overlay.style.transform = 'translateY(100%)';
+        }
+    });
+});
+
+// Hover effects for collaboration items
+const collaborationItems = document.querySelectorAll('.collaboration-item');
+collaborationItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        const overlay = item.querySelector('.collaboration-overlay');
+        if (overlay) {
+            overlay.style.transform = 'translateY(0)';
+        }
+    });
+    
+    item.addEventListener('mouseleave', () => {
+        const overlay = item.querySelector('.collaboration-overlay');
         if (overlay) {
             overlay.style.transform = 'translateY(100%)';
         }
@@ -195,7 +291,7 @@ if (contactForm) {
         const message = formData.get('message');
         
         // Create mailto link
-        const mailtoLink = `mailto:charul.parihar@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+        const mailtoLink = `mailto:charulparihar163@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
         
         // Open email client
         window.location.href = mailtoLink;
